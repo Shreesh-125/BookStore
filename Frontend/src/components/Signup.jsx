@@ -2,10 +2,33 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Login from './login'
 import { useForm } from 'react-hook-form'   
+import axios from 'axios'
 
 function Signup() {
     const { register, handleSubmit, formState: { errors } } = useForm();
-  const onSubmit = data => console.log(data);
+  const onSubmit = async (data) => {
+    const userInfo={
+        fullname:data.fullname,
+        email:data.email,
+        password:data.password
+    }
+   await axios.post("http://localhost:4001/user/signup",userInfo)
+    .then((res)=>{
+        console.log(res.data);
+        if(res.data){
+            alert("SignUp Successfully")
+        }   
+    }).catch((err)=>{
+       if(err.response){
+        alert("Error: "+ err.response.data.message)
+       }
+        
+    })
+    // console.log(data);
+    // console.log((userInfo));
+    
+    
+  };
   return (
     <>
     <div className='flex h-screen items-center justify-center  '>
@@ -18,9 +41,9 @@ function Signup() {
                 {/* Name */}
                 <div className='mt-4 space-y-2'>
                     <span>Name</span><br/>
-                    <input type="name" placeholder='Enter your Full Name' className='px-3 py-1 w-80 border rounded-md outline-none  dark:bg-slate-900 dark:text-white'
-                     {...register("name", { required: true })} /><br/>
-                      {errors.name && <span className='text-red-500 text-sm'>This field is required</span>}
+                    <input type="fullname" placeholder='Enter your Full Name' className='px-3 py-1 w-80 border rounded-md outline-none  dark:bg-slate-900 dark:text-white'
+                     {...register("fullname", { required: true })} /><br/>
+                      {errors.fullname && <span className='text-red-500 text-sm'>This field is required</span>}
 
                 </div>
                 {/* Email */}
