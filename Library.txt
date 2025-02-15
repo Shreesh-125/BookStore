@@ -1,8 +1,1 @@
-1) daisyui --> library for tailwind, which has direct component that we can use in our frontend
-    install cmd: npm i -D daisyui@latest
 
-***not library FREEPIK is website for photos for devlopment
-
-2) React slick is library for different sliders codes
-
-3) React Hook Form- is library for form data and error msg to display purpose like login sigup credentials
